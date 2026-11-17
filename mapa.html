@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<a<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mi Mapa 1</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+        <style> #mapa { height: 500px; }</style>
+    </head>
+
+    <body>
+        <div id="mapa">
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+            <script>
+                const mapa = L.map('mapa').setView([40.4168, -3.7038], 13);
+                const osmEstandar = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                 maxZoom: 19,
+                }).addTo(mapa);
+
+            const marcadorayto = L.marker([40.4168, -3.7038]).addTo(mapa);
+            marcadorayto.bindPopup('<b>Ayuntamiento de Madrid</b><br>El Ayuntamiento de Madrid').openPopup();
+            marcadorayto.addTo(mapa);
+
+
+            marcadorayto.on('mouseover', function() {
+                marcadorayto.openPopup();
+            });
+
+            marcadorayto.on('mouseout', function() {
+                marcadorayto.closePopup();
+            });
+
+            L.polyline([
+                [40.4168, -3.7038],
+                [40.4180, -3.7030],
+                [40.4190, -3.7020]
+        ], {color: 'blue', weight: 4, opacity: 0.7} ).addTo(mapa);
+
+        L.polyline([
+            [40.4168, -3.7038],
+            [40.4150, -3.7040],
+            [40.4140, -3.7050]
+        ], {color: 'blue', weight: 4, opacity: 0.7} ).addTo(mapa);
+
+        L.polyline([
+            [40.4168, -3.7038],
+            [40.4170, -3.7020],
+            [40.4180, -3.7010]
+        ], {color: 'blue', weight: 4, opacity: 0.7} ).addTo(mapa);
+
+        L.polygon([
+            [40.4168, -3.7038],
+            [40.4170, -3.7020],
+            [40.4180, -3.7010],
+            [40.4190, -3.7000]
+        ], {color: 'red', weight: 4, opacity: 0.7, fillColor: 'black', fillOpacity: 0.5} ).addTo(mapa);
+         
+        L.circle([40.4168, -3.7038], {radius: 60, color: 'green', weight: 4, opacity: 0.7, fillColor: 'yellow', fillOpacity: 0.5} ).addTo(mapa);
+         const dimeCoord = L.popup()
+
+         function alPulsarMapa(e) {
+            dimeCoord
+         .setLatLng(e.latlng)
+         .setContent("Has pulado en: " + e.latlng.toString())
+         .openOn(mapa);
+        }
+
+        mapa.on('click', alPulsarMapa);
+         
+         
+         </script>
+        </div>
+    </body>
+    </html>
